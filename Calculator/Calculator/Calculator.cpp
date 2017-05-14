@@ -36,7 +36,7 @@ void Calculator :: Input()
 
 bool Calculator::CheckEnd()
 {
-	if (input == END_STRING)
+	if (inputString == END_STRING)
 	{
 		cout << "I—¹‚µ‚Ü‚µ‚½" << endl;
 		return true;
