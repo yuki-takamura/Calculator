@@ -1,8 +1,8 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include "Calculator.h"
 
-#define MAX_DIGIT 50
 #define END_STRING "0"
 
 using namespace std;
@@ -20,39 +20,73 @@ void Calculator :: Run()
 			continue;
 		if (Calculator::HasString())
 			continue;
+
+		Calculator::SetValue();
+
+		Calculator::Show();
 	}
 }
 
 void Calculator :: Input()
 {
-	cout << "“ü—Í„„";
+	cout << " “ü—Í„„";
 
-	cin >> input;
+	cin >> inputString;
 }
 
 bool Calculator::CheckEnd()
 {
 	if (input == END_STRING)
+	{
+		cout << "I—¹‚µ‚Ü‚µ‚½" << endl;
 		return true;
+	}
 	else
+	{
 		return false;
+	}
 }
 
 bool Calculator::CheckOverString()
 {
-	if (input.length() > MAX_DIGIT)
+	if (inputString.length() > MAX_DIGIT)
+	{
+		cout << MAX_DIGIT << "Œ…‚ð’´‚¦‚Ä‚¢‚Ü‚·" <<  endl;
+		cout << MAX_DIGIT << "Œ…ˆÈ“à‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" << endl;
 		return true;
-	else
+	}
+	else 
+	{
 		return false;
+	}
 }
 
 bool Calculator::HasString()
 {
-	for (int i = 0; i < input.length(); i++)
+	for (int i = 0; i < inputString.length(); i++)
 	{
-		if (input[i] < '0' || input[i] > '9')
+		if (inputString[i] < '0' || inputString[i] > '9')
+		{
+			cout << "”’l‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" << endl;
 			return true;
+		}
 	}
 
 	return false;
+}
+
+void Calculator::SetValue()
+{
+	for (int i = 0; i < inputString.length(); i++)
+	{
+		inputValue[i] = inputString[i] - '0';
+	}
+}
+
+void Calculator::Show()
+{
+	for(int i = 0; i < inputString.length(); i++)
+		cout << inputValue[i];
+
+	cout << endl;
 }
