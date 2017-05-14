@@ -1,5 +1,4 @@
 #include <iostream>
-#include <iomanip>
 #include <string>
 #include "Calculator.h"
 
@@ -77,9 +76,9 @@ bool Calculator::HasString()
 
 void Calculator::SetValue()
 {
-	for (int i = 0; i < inputString.length(); i++)
+	for (int i = inputString.length() - 1; i >= 0; i--)
 	{
-		inputValue[i] = inputString[i] - '0';
+		inputValue[inputString.length() - 1 - i] = inputString[i] - '0';
 	}
 }
 
