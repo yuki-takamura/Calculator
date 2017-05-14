@@ -1,10 +1,11 @@
-#include <iostream>
-#define MAX_DIGIT 50
-
-using namespace std;
+#include "Calculator.h"
 
 int main()
 {
+	Calculator calculator;
+
+	calculator.Run();
 
 	return 0;
 }
+
