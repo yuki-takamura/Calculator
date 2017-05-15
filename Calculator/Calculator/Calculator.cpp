@@ -29,7 +29,9 @@ void OBJ Run()
 
 		OBJ SetValue();
 
-		OBJ Show();
+		OBJ Calculate();
+
+		OBJ Draw();
 	}
 }
 
@@ -103,13 +105,26 @@ void OBJ SetValue()
 	inputDegit = inputString.length();
 }
 
-void OBJ Show()
+void OBJ Calculate()
 {
 	if (savedDegit > inputDegit)
 		degit = savedDegit;
 	else if (inputDegit > savedDegit)
 		degit = inputDegit;
 
+	for (int i = 0; i < degit; i++)
+	{
+		sum[i] = savedValue[i] + inputValue[i];
+		if (sum[i] >= 10)
+		{
+			sum[i] -= 10;
+			sum[i + 1] ++;
+		}
+	}
+}
+
+void OBJ Draw()
+{
 	OBJ WriteSavedValue();
 
 	OBJ WriteInputValue();
@@ -188,6 +203,12 @@ void OBJ WriteSumValue()
 
 	for (int i = inputDegit - 1; i >= 0; i--)
 	{
-		cout << inputValue[i];
+		cout << sum[i];
 	}
+
+	/*for (int i = 0; i < 50; i++)
+	{
+		savedValue[i] = sum[i];
+		savedDegit = sumDegit;
+	}*/
 }

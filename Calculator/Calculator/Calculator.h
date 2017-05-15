@@ -21,9 +21,7 @@ class Calculator
 		int inputDegit;
 		int sum[MAX_DIGIT];
 		int sumDegit;
-
 		int tabCount;
-
 
 		void Input();
 
@@ -32,8 +30,9 @@ class Calculator
 		bool HasString();
 
 		void SetValue();
+		void Calculate();
 
-		void Show();
+		void Draw();
 		void WriteSavedValue();
 		void WriteInputValue();
 		void WriteBar();
