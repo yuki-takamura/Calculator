@@ -11,6 +11,8 @@ using namespace std;
 ///</summary>
 void Calculator :: Run()
 {
+	savedDegit = 1;
+
 	for(;;)
 	{
 		Calculator::Input();
@@ -77,7 +79,7 @@ bool Calculator::CheckOverString()
 ///</summary>
 bool Calculator::HasString()
 {
-	for (int i = 0; i < inputString.length(); i++)
+	for (unsigned int i = 0; i < inputString.length(); i++)
 	{
 		if (inputString[i] < '0' || inputString[i] > '9')
 		{
@@ -95,10 +97,17 @@ void Calculator::SetValue()
 	{
 		inputValue[inputString.length() - 1 - i] = inputString[i] - '0';
 	}
+
+	inputDegit = inputString.length();
 }
 
 void Calculator::Show()
 {
+	if (savedDegit > inputDegit)
+		degit = savedDegit;
+	else if (inputDegit > savedDegit)
+		degit = inputDegit;
+
 	//‘«‚³‚ê‚é’l-----------------------------------
 	cout << endl;
 	cout << " ";
@@ -106,7 +115,13 @@ void Calculator::Show()
 	{
 		cout << " ";
 	}
-	for (int i = 50 - 1; i >= 0; i--)
+
+	for (int i = 0; i < degit - savedDegit; i++)
+	{
+		cout << " ";
+	}
+
+	for (int i = savedDegit - 1; i >= 0; i--)
 	{
 		cout << savedValue[i];
 	}
@@ -115,7 +130,12 @@ void Calculator::Show()
 	cout << endl;
 	cout << "  +  ";
 
-	for (int i = inputString.length() - 1; i >= 0; i--)
+	for (int i = 0; i < degit - inputDegit; i++)
+	{
+		cout << " ";
+	}
+
+	for (int i = inputDegit - 1; i >= 0; i--)
 	{
 		cout << inputValue[i];
 	}
@@ -128,7 +148,7 @@ void Calculator::Show()
 		cout << "-";
 	}
 
-	for (int i = inputString.length() - 1; i >= 0; i--)
+	for (int i = 0; i < degit; i++)
 	{
 		cout << "-";
 	}
@@ -141,7 +161,12 @@ void Calculator::Show()
 		cout << " ";
 	}
 
-	for (int i = inputString.length() - 1; i >= 0; i--)
+	for (int i = 0; i < degit - inputDegit; i++)
+	{
+		cout << " ";
+	}
+
+	for (int i = inputDegit - 1; i >= 0; i--)
 	{
 		cout << inputValue[i];
 	}

@@ -14,9 +14,14 @@ class Calculator
 	private:
 
 		std :: string inputString;
+		int degit;
 		int savedValue[MAX_DIGIT] = { 0 };
+		int savedDegit;
 		int inputValue[MAX_DIGIT];
+		int inputDegit;
 		int sum[MAX_DIGIT];
+		int sumDegit;
+
 		int tabCount;
 
 
