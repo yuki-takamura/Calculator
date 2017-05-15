@@ -2,6 +2,7 @@
 #include <string>
 #include "Calculator.h"
 
+#define OBJ Calculator:: 
 #define END_STRING "0"
 #define TAB 4
 
@@ -10,32 +11,32 @@ using namespace std;
 ///<summary>
 /// 実行
 ///</summary>
-void Calculator :: Run()
+void OBJ Run()
 {
 	savedDegit = 1;
 
 	for(;;)
 	{
-		Calculator::Input();
+		OBJ Input();
 
 		//有効な入力であるかを確認
-		if (Calculator::CheckEnd())
+		if (OBJ CheckEnd())
 			break;
-		if (Calculator::CheckOverString())
+		if (OBJ CheckOverString())
 			continue;
-		if (Calculator::HasString())
+		if (OBJ HasString())
 			continue;
 
-		Calculator::SetValue();
+		OBJ SetValue();
 
-		Calculator::Show();
+		OBJ Show();
 	}
 }
 
 ///<summary>
 /// 入力を取得
 ///</summary>
-void Calculator :: Input()
+void OBJ Input()
 {
 	cout << " 入力 --＞ ";
 
@@ -45,7 +46,7 @@ void Calculator :: Input()
 ///<summary>
 /// 終了するかどうか
 ///</summary>
-bool Calculator::CheckEnd()
+bool OBJ CheckEnd()
 {
 	if (inputString == END_STRING)
 	{
@@ -61,7 +62,7 @@ bool Calculator::CheckEnd()
 ///<summary>
 /// 入力制限を行う
 ///</summary>
-bool Calculator::CheckOverString()
+bool OBJ CheckOverString()
 {
 	if (inputString.length() > MAX_DIGIT)
 	{
@@ -78,7 +79,7 @@ bool Calculator::CheckOverString()
 ///<summary>
 /// 数値以外の入力があるか
 ///</summary>
-bool Calculator::HasString()
+bool OBJ HasString()
 {
 	for (unsigned int i = 0; i < inputString.length(); i++)
 	{
@@ -92,7 +93,7 @@ bool Calculator::HasString()
 	return false;
 }
 
-void Calculator::SetValue()
+void OBJ SetValue()
 {
 	for (int i = inputString.length() - 1; i >= 0; i--)
 	{
@@ -102,25 +103,25 @@ void Calculator::SetValue()
 	inputDegit = inputString.length();
 }
 
-void Calculator::Show()
+void OBJ Show()
 {
 	if (savedDegit > inputDegit)
 		degit = savedDegit;
 	else if (inputDegit > savedDegit)
 		degit = inputDegit;
 
-	Calculator::WriteSavedValue();
+	OBJ WriteSavedValue();
 
-	Calculator::WriteInputValue();
+	OBJ WriteInputValue();
 
-	Calculator::WriteBar();
+	OBJ WriteBar();
 
-	Calculator::WriteSumValue();
+	OBJ WriteSumValue();
 
 	cout << endl << endl;
 }
 
-void Calculator::WriteSavedValue()
+void OBJ WriteSavedValue()
 {
 	cout << endl;
 	cout << " ";
@@ -140,7 +141,7 @@ void Calculator::WriteSavedValue()
 	}
 }
 
-void Calculator::WriteInputValue()
+void OBJ WriteInputValue()
 {
 	cout << endl;
 	cout << "  +  ";
@@ -156,7 +157,7 @@ void Calculator::WriteInputValue()
 	}
 }
 
-void Calculator::WriteBar()
+void OBJ WriteBar()
 {
 	cout << endl;
 	cout << " ";
@@ -171,7 +172,7 @@ void Calculator::WriteBar()
 	}
 }
 
-void Calculator::WriteSumValue()
+void OBJ WriteSumValue()
 {
 	cout << endl;
 	cout << " ";
