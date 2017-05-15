@@ -3,6 +3,7 @@
 #include "Calculator.h"
 
 #define END_STRING "0"
+#define TAB 4
 
 using namespace std;
 
@@ -108,10 +109,22 @@ void Calculator::Show()
 	else if (inputDegit > savedDegit)
 		degit = inputDegit;
 
-	//足される値-----------------------------------
+	Calculator::WriteSavedValue();
+
+	Calculator::WriteInputValue();
+
+	Calculator::WriteBar();
+
+	Calculator::WriteSumValue();
+
+	cout << endl << endl;
+}
+
+void Calculator::WriteSavedValue()
+{
 	cout << endl;
 	cout << " ";
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < TAB; i++)
 	{
 		cout << " ";
 	}
@@ -125,8 +138,10 @@ void Calculator::Show()
 	{
 		cout << savedValue[i];
 	}
+}
 
-	//足す値--------------------------------------
+void Calculator::WriteInputValue()
+{
 	cout << endl;
 	cout << "  +  ";
 
@@ -139,11 +154,13 @@ void Calculator::Show()
 	{
 		cout << inputValue[i];
 	}
+}
 
-	//イコール------------------------------------
+void Calculator::WriteBar()
+{
 	cout << endl;
 	cout << " ";
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < TAB; i++)
 	{
 		cout << "-";
 	}
@@ -152,11 +169,13 @@ void Calculator::Show()
 	{
 		cout << "-";
 	}
+}
 
-	//合計値-------------------------------------
+void Calculator::WriteSumValue()
+{
 	cout << endl;
 	cout << " ";
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < TAB; i++)
 	{
 		cout << " ";
 	}
@@ -170,6 +189,4 @@ void Calculator::Show()
 	{
 		cout << inputValue[i];
 	}
-
-	cout << endl << endl;
 }

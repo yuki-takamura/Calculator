@@ -34,6 +34,10 @@ class Calculator
 		void SetValue();
 
 		void Show();
+		void WriteSavedValue();
+		void WriteInputValue();
+		void WriteBar();
+		void WriteSumValue();
 };
 
 #endif
