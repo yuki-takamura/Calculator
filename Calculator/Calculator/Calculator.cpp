@@ -121,6 +121,11 @@ void OBJ Calculate()
 			sum[i + 1] ++;
 		}
 	}
+
+	if (sum[degit] != 0)
+		sumDegit = degit;
+	else
+		sumDegit = degit - 1;
 }
 
 void OBJ Draw()
@@ -196,19 +201,19 @@ void OBJ WriteSumValue()
 		cout << " ";
 	}
 
-	for (int i = 0; i < degit - inputDegit; i++)
+	for (int i = 0; i < degit - sumDegit; i++)
 	{
 		cout << " ";
 	}
 
-	for (int i = inputDegit - 1; i >= 0; i--)
+	for (int i = sumDegit - 1; i >= 0; i--)
 	{
 		cout << sum[i];
 	}
 
-	/*for (int i = 0; i < 50; i++)
-	{
+	for (int i = 0; i < MAX_DIGIT; i++)
 		savedValue[i] = sum[i];
-		savedDegit = sumDegit;
-	}*/
+	savedDegit = sumDegit;
+	for (int i = 0; i < inputDegit; i++)
+		inputValue[i] = 0;
 }
