@@ -12,9 +12,13 @@ class Calculator
 		void Run();
 
 	private:
+
 		std :: string inputString;
+		int savedValue[MAX_DIGIT] = { 0 };
 		int inputValue[MAX_DIGIT];
 		int sum[MAX_DIGIT];
+		int tabCount;
+
 
 		void Input();
 
