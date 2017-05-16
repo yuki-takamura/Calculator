@@ -9,7 +9,7 @@
 using namespace std;
 
 ///<summary>
-/// Às
+/// å®Ÿè¡Œ
 ///</summary>
 void OBJ Run()
 {
@@ -19,7 +19,7 @@ void OBJ Run()
 	{
 		OBJ Input();
 
-		//—LŒø‚È“ü—Í‚Å‚ ‚é‚©‚ğŠm”F
+		//æœ‰åŠ¹ãªå…¥åŠ›ã§ã‚ã‚‹ã‹ã‚’ç¢ºèª
 		if (OBJ CheckEnd())
 			break;
 		if (OBJ CheckOverString())
@@ -36,23 +36,23 @@ void OBJ Run()
 }
 
 ///<summary>
-/// “ü—Í‚ğæ“¾
+/// å…¥åŠ›ã‚’å–å¾—
 ///</summary>
 void OBJ Input()
 {
-	cout << " “ü—Í --„ ";
+	cout << " å…¥åŠ› --ï¼ ";
 
 	cin >> inputString;
 }
 
 ///<summary>
-/// I—¹‚·‚é‚©‚Ç‚¤‚©
+/// çµ‚äº†ã™ã‚‹ã‹ã©ã†ã‹
 ///</summary>
 bool OBJ CheckEnd()
 {
 	if (inputString == END_STRING)
 	{
-		cout << "I—¹‚µ‚Ü‚µ‚½" << endl;
+		cout << "çµ‚äº†ã—ã¾ã—ãŸ" << endl;
 		return true;
 	}
 	else
@@ -62,14 +62,14 @@ bool OBJ CheckEnd()
 }
 
 ///<summary>
-/// “ü—Í§ŒÀ‚ğs‚¤
+/// å…¥åŠ›åˆ¶é™ã‚’è¡Œã†
 ///</summary>
 bool OBJ CheckOverString()
 {
 	if (inputString.length() > MAX_DIGIT)
 	{
-		cout << MAX_DIGIT << "Œ…‚ğ’´‚¦‚Ä‚¢‚Ü‚·" <<  endl;
-		cout << MAX_DIGIT << "Œ…ˆÈ“à‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" << endl;
+		cout << MAX_DIGIT << "æ¡ã‚’è¶…ãˆã¦ã„ã¾ã™" <<  endl;
+		cout << MAX_DIGIT << "æ¡ä»¥å†…ã§å…¥åŠ›ã—ã¦ãã ã•ã„" << endl;
 		return true;
 	}
 	else 
@@ -79,7 +79,7 @@ bool OBJ CheckOverString()
 }
 
 ///<summary>
-/// ”’lˆÈŠO‚Ì“ü—Í‚ª‚ ‚é‚©
+/// æ•°å€¤ä»¥å¤–ã®å…¥åŠ›ãŒã‚ã‚‹ã‹
 ///</summary>
 bool OBJ HasString()
 {
@@ -87,7 +87,7 @@ bool OBJ HasString()
 	{
 		if (inputString[i] < '0' || inputString[i] > '9')
 		{
-			cout << "”’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" << endl;
+			cout << "æ•°å€¤ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„" << endl;
 			return true;
 		}
 	}
@@ -118,7 +118,7 @@ void OBJ Calculate()
 		if (sum[i] >= 10)
 		{
 			sum[i] -= 10;
-			sum[i + 1] ++;
+			inputValue[i + 1]++;
 		}
 	}
 
