@@ -4,55 +4,49 @@
 
 #define OBJ Calculator:: 
 #define END_STRING "0"
+#define INITIALIZE_STRING "000"
 #define TAB 4
 
 using namespace std;
 
-///<summary>
-/// å®Ÿè¡Œ
-///</summary>
-void OBJ Run()
+void OBJ Initialize()
 {
-	savedDegit = 1;
-
-	for(;;)
+	hasError = false;
+	subtraction = false;
+	savedDigit = 1;
+	for (int i = 0; i < MAX_DIGIT; i++)
 	{
-		OBJ Input();
-
-		//æœ‰åŠ¹ãªå…¥åŠ›ã§ã‚ã‚‹ã‹ã‚’ç¢ºèª
-		if (OBJ CheckEnd())
-			break;
-		if (OBJ CheckOverString())
-			continue;
-		if (OBJ HasString())
-			continue;
-
-		OBJ SetValue();
-
-		OBJ Calculate();
-
-		OBJ Draw();
+		savedValue[i] = 0;
+		sum[i] = 0;
 	}
 }
 
 ///<summary>
-/// å…¥åŠ›ã‚’å–å¾—
+/// “ü—Í‚ğæ“¾
 ///</summary>
 void OBJ Input()
 {
-	cout << " å…¥åŠ› --ï¼ ";
+	cout << "   " << END_STRING << " : I—¹" << endl;
+	cout << " "<< INITIALIZE_STRING <<" : ‰Šú‰»" << endl;
+	cout << " “ü—Í --„ ";
 
 	cin >> inputString;
 }
 
 ///<summary>
-/// çµ‚äº†ã™ã‚‹ã‹ã©ã†ã‹
+/// I—¹‚·‚é‚©‚Ç‚¤‚©
 ///</summary>
 bool OBJ CheckEnd()
 {
 	if (inputString == END_STRING)
 	{
-		cout << "çµ‚äº†ã—ã¾ã—ãŸ" << endl;
+		cout << " ¡‚Ü‚Å‚Ì‡Œv‚Í ";
+		for (int i = savedDigit - 1; i >= 0; i--)
+		{
+			cout << savedValue[i];
+		}
+		cout << " ‚Å‚µ‚½" << endl;
+		cout << " I—¹‚µ‚Ü‚µ‚½" << endl;
 		return true;
 	}
 	else
@@ -62,70 +56,199 @@ bool OBJ CheckEnd()
 }
 
 ///<summary>
-/// å…¥åŠ›åˆ¶é™ã‚’è¡Œã†
+/// ‰Šú‰»‚·‚é‚©‚Ç‚¤‚©
 ///</summary>
-bool OBJ CheckOverString()
+bool OBJ CheckInitialize()
 {
-	if (inputString.length() > MAX_DIGIT)
+	if (inputString == INITIALIZE_STRING)
 	{
-		cout << MAX_DIGIT << "æ¡ã‚’è¶…ãˆã¦ã„ã¾ã™" <<  endl;
-		cout << MAX_DIGIT << "æ¡ä»¥å†…ã§å…¥åŠ›ã—ã¦ãã ã•ã„" << endl;
+		cout << " ‰Šú‰»‚µ‚Ü‚µ‚½" << endl << endl;
+		OBJ Initialize();
 		return true;
 	}
-	else 
+	else
 	{
 		return false;
 	}
 }
 
 ///<summary>
-/// æ•°å€¤ä»¥å¤–ã®å…¥åŠ›ãŒã‚ã‚‹ã‹
+/// “ü—Í§ŒÀ‚ğs‚¤
+///</summary>
+bool OBJ CheckOverString()
+{
+	if (inputString.length() > MAX_DIGIT)
+	{
+		cout << MAX_DIGIT << "Œ…‚ğ’´‚¦‚Ä‚¢‚Ü‚·" << endl;
+		cout << MAX_DIGIT << "Œ…ˆÈ“à‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" << endl;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+///<summary>
+/// ”’lˆÈŠO‚Ì“ü—Í‚ª‚ ‚é‚©
 ///</summary>
 bool OBJ HasString()
 {
 	for (unsigned int i = 0; i < inputString.length(); i++)
 	{
-		if (inputString[i] < '0' || inputString[i] > '9')
+		if (i == 0)
 		{
-			cout << "æ•°å€¤ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„" << endl;
-			return true;
+			if (inputString[i] != '-')
+			{
+				if (inputString[i] < '0' || inputString[i] > '9')
+				{
+					cout << "”’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" << endl;
+					return true;
+				}
+			}
+		}
+		else
+		{
+			if (inputString[i] < '0' || inputString[i] > '9')
+			{
+				cout << "”’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" << endl;
+				return true;
+			}
 		}
 	}
 
 	return false;
 }
 
+///<summary>
+/// “ü—Í‚ğ”’l‰»
+///</summary>
 void OBJ SetValue()
 {
-	for (int i = inputString.length() - 1; i >= 0; i--)
+	inputDigit = inputString.length();
+	
+	if (inputString[0] == '-')
 	{
-		inputValue[inputString.length() - 1 - i] = inputString[i] - '0';
+		//•„†•ª‚PŒ…‚¸‚ç‚·
+		for (int i = 0; i < inputDigit; i++)
+		{
+			if (i == MAX_DIGIT - 1)
+				inputString[i] = 0;
+			inputString[i] = inputString[i + 1];
+		}
+
+		//ÅãˆÊ‚ª-‚¾‚©‚çŒ…”‚ğŒ¸‚ç‚·
+		inputDigit--;
+		subtraction = true;
 	}
 
-	inputDegit = inputString.length();
+	for (int i = inputDigit - 1; i >= 0; i--)
+	{
+		inputValue[inputDigit - 1 - i] = inputString[i] - '0';
+	}
+
+	//ÅãˆÊ‚ª0‚Ì‚Æ‚«Œ…”‚ğŒ¸‚ç‚·
+	if (inputValue[inputDigit - 1] == 0)
+		inputDigit--;
 }
 
 void OBJ Calculate()
 {
-	if (savedDegit > inputDegit)
-		degit = savedDegit;
-	else if (inputDegit > savedDegit)
-		degit = inputDegit;
+	sumDigit = 0;
 
-	for (int i = 0; i < degit; i++)
+	if (savedDigit >= inputDigit)
+	{
+		digit = savedDigit;
+	}
+	else
+	{
+		digit = inputDigit;
+	}
+
+	if (subtraction)
+		OBJ CalculateSubtraction();
+	else
+		OBJ CalculateAddition();
+
+	if (sumDigit > digit)
+		digit = sumDigit;
+}
+
+void OBJ CalculateAddition()
+{
+	//ŒJ‚èã‚ª‚èƒtƒ‰ƒO
+	bool addLeftDigit = false;
+
+	for (int i = 0; i < digit; i++)
 	{
 		sum[i] = savedValue[i] + inputValue[i];
+		if (addLeftDigit)
+		{
+			sum[i] ++;
+			addLeftDigit = false;
+		}
+		sumDigit++;
+
+		//ŒJ‚èã‚ª‚è
 		if (sum[i] >= 10)
 		{
 			sum[i] -= 10;
-			inputValue[i + 1]++;
+			addLeftDigit = true;
+
+			//ŒJ‚èã‚ª‚è‚ÅŒ…”‚ª‘‚¦‚é‚Æ‚«
+			if (i + 1 == digit)
+			{
+				sum[i + 1] = 1;
+				sumDigit++;
+			}
+
+			if (i + 1 == MAX_DIGIT)
+			{
+				hasError = true;
+				cout << "ERROR!" << endl;
+				OBJ Initialize();
+			}
+		}
+	}
+}
+
+void OBJ CalculateSubtraction()
+{
+	//ŒJ‚è‰º‚ª‚èƒtƒ‰ƒO
+	bool subLeftDigit = false;
+
+	for (int i = 0; i < digit; i++)
+	{
+		sum[i] = savedValue[i] - inputValue[i];
+		if (subLeftDigit)
+		{
+			sum[i]--;
+			subLeftDigit = false;
+		}
+		sumDigit++;
+
+		//ŒJ‚è‰º‚ª‚è
+		if (sum[i] < 0)
+		{
+			sum[i] += 10;
+			subLeftDigit = true;
 		}
 	}
 
-	if (sum[degit] != 0)
-		sumDegit = degit;
-	else
-		sumDegit = degit - 1;
+	int newSumDigit = sumDigit;
+
+	//ÅãˆÊ‚©‚ç0‚ª‘±‚­ê‡AŒ…‚ğŒ¸‚ç‚·
+	for (int i = sumDigit - 1; i > 0; i--)
+	{
+		if (sum[i] != 0)
+		{
+			break;
+		}
+		
+		newSumDigit--;
+	}
+
+	sumDigit = newSumDigit;
 }
 
 void OBJ Draw()
@@ -145,17 +268,18 @@ void OBJ WriteSavedValue()
 {
 	cout << endl;
 	cout << " ";
+
 	for (int i = 0; i < TAB; i++)
 	{
 		cout << " ";
 	}
 
-	for (int i = 0; i < degit - savedDegit; i++)
+	for (int i = 0; i < digit - savedDigit; i++)
 	{
 		cout << " ";
 	}
 
-	for (int i = savedDegit - 1; i >= 0; i--)
+	for (int i = savedDigit - 1; i >= 0; i--)
 	{
 		cout << savedValue[i];
 	}
@@ -164,14 +288,18 @@ void OBJ WriteSavedValue()
 void OBJ WriteInputValue()
 {
 	cout << endl;
-	cout << "  +  ";
 
-	for (int i = 0; i < degit - inputDegit; i++)
+	if (subtraction)
+		cout << "  -  ";
+	else
+		cout << "  +  ";
+
+	for (int i = 0; i < digit - inputDigit; i++)
 	{
 		cout << " ";
 	}
 
-	for (int i = inputDegit - 1; i >= 0; i--)
+	for (int i = inputDigit - 1; i >= 0; i--)
 	{
 		cout << inputValue[i];
 	}
@@ -186,7 +314,7 @@ void OBJ WriteBar()
 		cout << "-";
 	}
 
-	for (int i = 0; i < degit; i++)
+	for (int i = 0; i < digit; i++)
 	{
 		cout << "-";
 	}
@@ -201,19 +329,30 @@ void OBJ WriteSumValue()
 		cout << " ";
 	}
 
-	for (int i = 0; i < degit - sumDegit; i++)
+	for (int i = 0; i < digit - sumDigit; i++)
 	{
 		cout << " ";
 	}
 
-	for (int i = sumDegit - 1; i >= 0; i--)
+	for (int i = sumDigit - 1; i >= 0; i--)
 	{
 		cout << sum[i];
 	}
+}
 
+void OBJ Reset()
+{
 	for (int i = 0; i < MAX_DIGIT; i++)
 		savedValue[i] = sum[i];
-	savedDegit = sumDegit;
-	for (int i = 0; i < inputDegit; i++)
+	savedDigit = sumDigit;
+
+	//“ü—Í•ŒJ‚èã‚ª‚è‚Ì’l‚ğƒŠƒZƒbƒg
+	for (int i = 0; i < inputDigit + 1; i++)
 		inputValue[i] = 0;
+
+	//ÅãˆÊ‚ª0‚Ì‚Æ‚«Œ…”‚ğŒ¸‚ç‚·
+	if (savedValue[savedDigit - 1] == 0)
+		savedDigit--;
+
+	subtraction = false;
 }

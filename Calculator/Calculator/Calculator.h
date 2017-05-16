@@ -13,30 +13,42 @@ class Calculator
 
 	private:
 
-		std :: string inputString;
-		int degit;
-		int savedValue[MAX_DIGIT] = { 0 };
-		int savedDegit;
+		std::string inputString;
+		int digit;
+		int savedValue[MAX_DIGIT];
+		int savedDigit;
 		int inputValue[MAX_DIGIT];
-		int inputDegit;
+		int inputDigit;
 		int sum[MAX_DIGIT];
-		int sumDegit;
-		int tabCount;
+		int sumDigit;
+		bool hasError;
+
+		///<summary>
+		/// Œ¸Z‚ğs‚¤‚Æ‚«‚Ìƒtƒ‰ƒO•Ï”
+		///</summary>
+		bool subtraction;
+
+		void Initialize();
 
 		void Input();
 
 		bool CheckEnd();
+		bool CheckInitialize();
 		bool CheckOverString();
 		bool HasString();
 
 		void SetValue();
 		void Calculate();
+		void CalculateAddition();
+		void CalculateSubtraction();
 
 		void Draw();
 		void WriteSavedValue();
 		void WriteInputValue();
 		void WriteBar();
 		void WriteSumValue();
+
+		void Reset();
 };
 
 #endif
